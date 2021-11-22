@@ -6,7 +6,7 @@
 
 body {
     margin: 0;
-    background: linear-gradient(to right, hsl(200, 100%, 50%), hsl(145.4, 100%, 50%))
+    background: linear-gradient(to right, hsl(200, 100%, 50%), hsl(145, 100%, 50%));
 }
 
 .calculator-grid {
@@ -34,22 +34,20 @@ body {
     grid-column: span 2;
 }
 
-/* have this take up the entire top row */
 .output {
     grid-column: 1 / -1;
-    background-color: hsla(0, 0%, 0%, 0.8);
+    background-color: hsla(0, 0%, 0%, 0.75);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    /* space elements from each other far apart */
     justify-content: space-around;
-    padding: 2.75rem;
+    padding: .75rem;
     word-wrap: break-word;
     word-break: break-all;
 }
 
 .output .previous-operand {
-    color: hsla(0, 0%, 100%, 0.8);
+    color: hsla(0, 0%, 100%, 0.75);
     font-size: 1.5rem;
 }
 
