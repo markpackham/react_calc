@@ -131,6 +131,21 @@ function evaluate({ currentOperand, previousOperand, operation }) {
   return computation.toString();
 }
 
+const INTEGER_FORMATTER = new Intl.NumberFormat("en-us", {
+  maximumFractionDigits: 0,
+});
+
+function formatOperand(operand) {
+  if (operand == null) return;
+  // So 10.9 turns into integer 10 and decimal .9
+  // So 10.0 turns into integer 10 and decimal is null
+  // If we have 100 and add another 0 then we get a "," so 1,000
+  const [integer, decimal] = operand.split(".");
+  if (decimal == null) return INTEGER_FORMATTER.format(integer);
+  // we don't want to format the decimal portion with commas
+  return `${INTEGER_FORMATTER.format(integer)}.${decimal}`;
+}
+
 function App() {
   const [{ currentOperand, previousOperand, operation }, dispatch] = useReducer(
     reducer,
@@ -141,9 +156,9 @@ function App() {
     <div className="calculator-grid">
       <div className="output">
         <div className="previous-operand">
-          {previousOperand} {operation}
+          {formatOperand(previousOperand)} {operation}
         </div>
-        <div className="current-operand">{currentOperand}</div>
+        <div className="current-operand">{formatOperand(currentOperand)}</div>
       </div>
       <button
         className="span-two"
